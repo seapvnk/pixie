@@ -1,0 +1,34 @@
+body {
+  background-color: #ddd;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, .2);
+  margin: auto;
+  
+  width: 40vw;
+  height: 40vw;
+
+  transition: .3s;
+}
+
+.board:hover {
+  box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, .2);
+}
+
+.pixel {
+  box-sizing: border-box;
+}
+
+.pixel.is-grid {
+  border: 1px solid blueviolet;
+  
+}
+
+.pixel:hover {
+  filter: invert(.2);
+  border: 1px solid blueviolet;
+}
