@@ -1,22 +1,31 @@
+:root {
+    --board-size: 512px;
+}
+
 body {
-  background-color: #ddd;
+  font-family: sans-serif;
+}
+
+.app {
+  margin: auto;
+  margin-top: 1vw;
+
+  display: flex;
+  justify-content: center;
+  width: calc(var(--board-size) * 2);
+
+  align-items: flex-end;
 }
 
 .board {
   display: flex;
   flex-wrap: wrap;
 
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, .2);
-  margin: auto;
-  
-  width: 40vw;
-  height: 40vw;
+  background-color: #ddd;
+  width: var(--board-size);
+  height: var(--board-size);
 
   transition: .3s;
-}
-
-.board:hover {
-  box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, .2);
 }
 
 .pixel {
@@ -32,3 +41,26 @@ body {
   filter: invert(.2);
   border: 1px solid blueviolet;
 }
+
+.tools {
+  display: flex;
+  flex-flow: column;
+  flex-wrap: wrap;
+
+  
+  height: var(--board-size);
+  
+  border-right: 1px solid rebeccapurple;
+}
+
+.tool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ddd;
+
+  width: calc(var(--board-size) / 16);
+  height: calc(var(--board-size) / 16);
+}
+
