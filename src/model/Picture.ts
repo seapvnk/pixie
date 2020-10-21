@@ -11,9 +11,9 @@ class Picture {
         this.scale = scale;
     }
 
-    static empty(width: number, height: number, color: string) {
+    static empty(width: number, height: number, color: string, scale = 16) {
         const pixels = new Array<string>(width * height).fill(color);
-        return new Picture(width, height, pixels);
+        return new Picture(width, height, pixels, scale);
     }
 
     pixel(x: number, y: number) {
@@ -21,7 +21,7 @@ class Picture {
     }
 
     setPixel(x: number, y: number, color: string) {
-        const newPicture = new Picture(this.width, this.height, this.pixels);
+        const newPicture = new Picture(this.width, this.height, this.pixels, this.scale);
         newPicture.pixels[x + y * this.width] = color;
         return newPicture;
     }
