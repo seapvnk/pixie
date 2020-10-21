@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
+import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import Picture from '../model/Picture';
 
 interface BoardProps {
@@ -9,14 +9,26 @@ interface BoardProps {
 function Board({ picture, setPicture }: BoardProps) {
 
     const canvasReference = useRef<HTMLCanvasElement>(null);
+    const [coordinates, setCoordinates] = useState({x: 0, y: 0})
 
-    function handleMouseDown(event: any) {
-        console.log(event);
+    function handleMove(event: MouseEvent) {
+        const rect = canvasReference.current?.getBoundingClientRect();
+        if (rect) {
+            setCoordinates({
+                x: Math.floor((event.clientX - rect.left) / picture.scale),
+                y: Math.floor((event.clientY - rect.top) / picture.scale),
+            })
+        }
+    }
+
+    function handleClick() {
+        
+
+        setPicture(picture.setPixel(coordinates.x, coordinates.y, '#000'))
     }
 
     function draw(picture: Picture, context: CanvasRenderingContext2D) {
-        const scale = 10;
-        
+        const scale = picture.scale;
 
         for (let y = 0; y < picture.height; y++) {
             for (let x = 0; x < picture.width; x++) {
@@ -38,7 +50,18 @@ function Board({ picture, setPicture }: BoardProps) {
         }
     }, [draw])
 
-    return <canvas ref={canvasReference} onMouseDown={handleMouseDown} className="board"></canvas>
+    return (
+        <canvas
+            style={{
+                width: `${picture.scale * picture.width}px`,
+                height: `${picture.scale * picture.height}px`,
+            }}
+            ref={canvasReference}
+            onMouseMove={handleMove}
+            onMouseDown={handleClick}
+            className="board">
+        </canvas>
+    )
 }
 
 export default Board;
