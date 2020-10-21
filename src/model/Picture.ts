@@ -4,7 +4,7 @@ class Picture {
     pixels: Array<string>;
     scale: number;
 
-    constructor(width: number, height: number, pixels: Array<string>, scale = 10) {
+    constructor(width: number, height: number, pixels: Array<string>, scale = 16) {
         this.width = width;
         this.height = height;
         this.pixels = pixels;
@@ -18,6 +18,12 @@ class Picture {
 
     pixel(x: number, y: number) {
         return this.pixels[x + y * this.width];
+    }
+
+    setPixel(x: number, y: number, color: string) {
+        const newPicture = new Picture(this.width, this.height, this.pixels);
+        newPicture.pixels[x + y * this.width] = color;
+        return newPicture;
     }
 
 }
