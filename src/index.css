@@ -30,8 +30,7 @@ body {
 }
 
 .transparent-bg {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVQYlWNgwA4asOAhoXCwuYdshQDiNxkBDN6z+wAAAABJRU5ErkJggg==) repeat;
-  background-color: #ddd;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAG0lEQVQYlWNgYGAwxoKlsOAhoRCbIDbNg14hAPayDwt2KJneAAAAAElFTkSuQmCC) repeat;
 }
 
 .pixel {

@@ -5,12 +5,21 @@ interface BoardProps {
     picture: Picture;
     setPicture: Function;
     color: string;
+    backgroundType: number;
 }
 
-function Board({ picture, setPicture, color }: BoardProps) {
+function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
 
     const canvasReference = useRef<HTMLCanvasElement>(null);
     const [coordinates, setCoordinates] = useState({x: 0, y: 0})
+
+    function handleBackgroundType(backgroundType: number) {
+        if (backgroundType === 1) {
+            return 'transparent-bg';
+        }
+        
+        return ''
+    }
 
     function handleMove(event: MouseEvent) {
         const rect = canvasReference.current?.getBoundingClientRect();
@@ -58,7 +67,7 @@ function Board({ picture, setPicture, color }: BoardProps) {
             ref={canvasReference}
             onMouseMove={handleMove}
             onMouseDown={handleClick}
-            className="board">
+            className={`board ${handleBackgroundType(backgroundType)}`}>
         </canvas>
     )
 }
