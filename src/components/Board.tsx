@@ -4,9 +4,10 @@ import Picture from '../model/Picture';
 interface BoardProps {
     picture: Picture;
     setPicture: Function;
+    color: string;
 }
 
-function Board({ picture, setPicture }: BoardProps) {
+function Board({ picture, setPicture, color }: BoardProps) {
 
     const canvasReference = useRef<HTMLCanvasElement>(null);
     const [coordinates, setCoordinates] = useState({x: 0, y: 0})
@@ -22,9 +23,7 @@ function Board({ picture, setPicture }: BoardProps) {
     }
 
     function handleClick() {
-        
-
-        setPicture(picture.setPixel(coordinates.x, coordinates.y, '#000'))
+        setPicture(picture.setPixel(coordinates.x, coordinates.y, color))
     }
 
     function draw(picture: Picture, context: CanvasRenderingContext2D) {
