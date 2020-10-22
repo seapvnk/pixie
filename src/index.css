@@ -22,10 +22,16 @@ body {
   flex-wrap: wrap;
 
   background-color: #ddd;
+
   width: var(--board-size);
   height: var(--board-size);
 
   transition: .3s;
+}
+
+.transparent-bg {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVQYlWNgwA4asOAhoXCwuYdshQDiNxkBDN6z+wAAAABJRU5ErkJggg==) repeat;
+  background-color: #ddd;
 }
 
 .pixel {
@@ -47,6 +53,9 @@ body {
   flex-flow: column;
   flex-wrap: wrap;
 
+  background-color: #000;
+
+  width: 32px;
   
   height: var(--board-size);
   
@@ -60,7 +69,7 @@ body {
 
   background-color: #ddd;
 
-  width: calc(var(--board-size) / 16);
-  height: calc(var(--board-size) / 16);
+  width: 16px;
+  height: 16px;
 }
 
