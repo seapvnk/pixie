@@ -11,6 +11,7 @@ interface BoardProps {
 function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
 
     const canvasReference = useRef<HTMLCanvasElement>(null);
+    const [paiting, setPainting] = useState(false)
     const [coordinates, setCoordinates] = useState({x: 0, y: 0})
 
     function handleBackgroundType(backgroundType: number) {
@@ -29,10 +30,10 @@ function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
                 y: Math.floor((event.clientY - rect.top) / picture.scale),
             })
         }
-    }
 
-    function handleClick() {
-        setPicture(picture.setPixel(coordinates.x, coordinates.y, color))
+        if (paiting) {
+            setPicture(picture.setPixel(coordinates.x, coordinates.y, color))
+        }
     }
 
     function draw(picture: Picture, context: CanvasRenderingContext2D) {
@@ -56,7 +57,7 @@ function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
                 draw(picture, context);
             }
         }
-    }, [draw])
+    }, [picture])
 
     return (
         <canvas
@@ -66,7 +67,8 @@ function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
             }}
             ref={canvasReference}
             onMouseMove={handleMove}
-            onMouseDown={handleClick}
+            onMouseDown={() => setPainting(true)}
+            onMouseUp={() => setPainting(false)}
             className={`board ${handleBackgroundType(backgroundType)}`}>
         </canvas>
     )
