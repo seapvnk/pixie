@@ -14,5 +14,5 @@ const Tool: React.FC<ToolProps> = ({ fn, style, children }) => (
     <div style={ style?? {} } className="tool" onClick={() => fn()}> { children?? '' } </div>
 );
 
-
 export default Tool;
+export { ToolType };

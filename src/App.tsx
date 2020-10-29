@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Board from './components/Board';
-import Tool from './components/Tool';
+import Tool, { ToolType } from './components/Tool';
 import Picture from './model/Picture';
 
 import { RiEraserFill, RiStickyNote2Line } from "react-icons/ri";
