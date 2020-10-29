@@ -22,6 +22,11 @@ function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
         return ''
     }
 
+    function handleClick() {
+        setPicture(picture.fillAt(coordinates.x, coordinates.y, color));
+        setPainting(true)
+    }
+
     function handleMove(event: MouseEvent) {
         const rect = canvasReference.current?.getBoundingClientRect();
         if (rect) {
@@ -32,7 +37,7 @@ function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
         }
 
         if (paiting) {
-            setPicture(picture.setPixel(coordinates.x, coordinates.y, color))
+            setPicture(picture.fillAt(coordinates.x, coordinates.y, color));
         }
     }
 
@@ -67,7 +72,7 @@ function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
             }}
             ref={canvasReference}
             onMouseMove={handleMove}
-            onMouseDown={() => setPainting(true)}
+            onMouseDown={handleClick}
             onMouseUp={() => setPainting(false)}
             className={`board ${handleBackgroundType(backgroundType)}`}>
         </canvas>

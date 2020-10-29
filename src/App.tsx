@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Board from './components/Board';
+import Tool from './components/Tool';
 import Picture from './model/Picture';
+
+import { RiEraserFill, RiStickyNote2Line } from "react-icons/ri";
 
 function App() {
 
@@ -19,21 +22,28 @@ function App() {
     '#eb564b',  '#b0305c',  '#73275c',
     '#422445',  '#5a265e',  '#80366b',
     '#bd4882',  '#ff6b97 '
-  ]
+  ];
+
+  function clearCanvas() {
+    setPicture(Picture.empty(32, 32, '#ffffff00'))
+  }
+
+  function selectColor(selectedColor: string) {
+    return () => setColor(selectedColor)
+  }
+
   return (
     <div className="app">
       <div className="tools">
-        <div className="tool" onClick={() => setPicture(Picture.empty(32, 32, '#ffffff00'))}>C</div>
+        <Tool fn={clearCanvas}> <RiStickyNote2Line /> </Tool>
+        <Tool fn={selectColor('#ffffff00')}> <RiEraserFill /> </Tool>
         
-        <div className="tool" onClick={() => setColor('#ffffff00')}>E</div>
         {pallete.map(color => {
           return (
-            <div 
-              className="tool" 
-              onClick={() => setColor(color)}
+            <Tool 
+              fn={selectColor(color)}
               style={{ background: color }}
-            >
-            </div>
+            />
           )  
         })}
         
