@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 
 enum ToolType {
-    Pen,
+    Pencil,
     Fill,
 }
 
