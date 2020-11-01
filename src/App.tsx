@@ -26,7 +26,9 @@ function App() {
   ];
 
   function clearCanvas() {
-    setPicture(Picture.empty(32, 32, '#ffffff00'))
+    if (window.confirm('Delete your drawing?')) {
+      setPicture(Picture.empty(32, 32, '#ffffff00'))
+    }
   }
 
   function switchBrush(brush: ToolType) {
