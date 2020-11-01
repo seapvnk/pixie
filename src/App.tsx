@@ -22,12 +22,12 @@ function App() {
     '#e36956',  '#ffb570',  '#ff9166',
     '#eb564b',  '#b0305c',  '#73275c',
     '#422445',  '#5a265e',  '#80366b',
-    '#bd4882',  '#ff6b97 '
+    '#bd4882',  '#ff6b97 ',
   ];
 
   function clearCanvas() {
     if (window.confirm('Delete your drawing?')) {
-      setPicture(Picture.empty(32, 32, '#ffffff00'))
+      setPicture(Picture.empty(32, 32, '#ffffff00'));
     }
   }
 
@@ -36,35 +36,40 @@ function App() {
   }
 
   function selectColor(selectedColor: string) {
-    return () => setColor(selectedColor)
+    return () => setColor(selectedColor);
   }
 
   return (
-    <div className="app">
-      <div className="tools">
-        <Tool fn={switchBrush(ToolType.Pencil)}> <RiPencilLine /> </Tool>
-        <Tool fn={switchBrush(ToolType.Fill)}> <RiPaintLine /> </Tool>
-        <Tool fn={clearCanvas}> <RiStickyNote2Line /> </Tool>
-        <Tool fn={selectColor('#ffffff00')}> <RiEraserFill /> </Tool>
-        
-        {pallete.map(color => {
-          return (
-            <Tool 
-              fn={selectColor(color)}
-              style={{ background: color }}
-            />
-          )  
-        })}
-        
-      </div>
+    <div>
+      <h1>Pixie</h1>
 
-      <Board 
-        picture={picture} 
-        setPicture={setPicture} 
-        color={color}
-        backgroundType={1}
-        brush={brush}
-      />
+      <div className="app">
+        <div className="tools">
+          <Tool fn={switchBrush(ToolType.Pencil)}> <RiPencilLine /> </Tool>
+          <Tool fn={switchBrush(ToolType.Fill)}> <RiPaintLine /> </Tool>
+          <Tool fn={clearCanvas}> <RiStickyNote2Line /> </Tool>
+          <Tool fn={selectColor('#ffffff00')}> <RiEraserFill /> </Tool>
+        </div>
+
+        <Board 
+          picture={picture} 
+          setPicture={setPicture} 
+          color={color}
+          backgroundType={1}
+          brush={brush}
+        />
+
+        <div className="tools">
+          {pallete.map(color => {
+              return (
+                <Tool 
+                  fn={selectColor(color)}
+                  style={{ background: color }}
+                />
+              )  
+            })}
+        </div>
+      </div>
     </div>
   );
 }
