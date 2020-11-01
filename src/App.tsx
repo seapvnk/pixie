@@ -30,7 +30,7 @@ function App() {
   }
 
   function switchBrush(brush: ToolType) {
-    setBrush(brush);
+    return () => setBrush(brush);
   }
 
   function selectColor(selectedColor: string) {
