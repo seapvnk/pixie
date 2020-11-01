@@ -1,14 +1,16 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
-import Picture from '../model/Picture';
+import Picture, { PaintingProps } from '../model/Picture';
+import { ToolType } from './Tool';
 
 interface BoardProps {
     picture: Picture;
     setPicture: Function;
     color: string;
     backgroundType: number;
+    brush: ToolType
 }
 
-function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
+function Board({ picture, setPicture, color, backgroundType, brush }: BoardProps) {
 
     const canvasReference = useRef<HTMLCanvasElement>(null);
     const [paiting, setPainting] = useState(false)
@@ -22,9 +24,44 @@ function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
         return ''
     }
 
+    function floodFill(x: number, y: number, oldColor: string, color: string, picture: Picture, painted: Array<PaintingProps> = []) {
+        
+        if (color === oldColor) return ;
+        if (x < 0 || x >= picture.width || y < 0 || y >= picture.height) return ;
+        if (picture.pixel(x, y) !== oldColor) return ;
+
+        painted.push({ x, y, color });
+        picture = picture.setPixel(x, y, color);
+
+        floodFill(x + 1, y, oldColor, color, picture, painted);
+        floodFill(x - 1, y, oldColor, color, picture, painted);
+        floodFill(x, y + 1, oldColor, color, picture, painted);
+        floodFill(x, y - 1, oldColor, color, picture, painted);
+
+    }
+
+    function handleFillBrush(x: number, y: number, color: string, picture: Picture): Array<PaintingProps> {
+        const painted = new Array<PaintingProps>();
+        const oldColor = picture.pixel(x, y);
+        
+        floodFill(x, y, oldColor, color, picture, painted);
+
+        return painted;
+    }
+
     function handleClick() {
-        setPicture(picture.fillAt(coordinates.x, coordinates.y, color));
-        setPainting(true)
+        const {x, y} = coordinates;
+
+        if (brush === ToolType.Pencil) {
+            setPicture(picture.setPixel(x, y, color));
+            setPainting(true);
+        }
+
+        if (brush === ToolType.Fill) {
+            const painted = handleFillBrush(x, y, color, picture);
+            setPicture(picture.draw(picture, painted));
+        }
+        
     }
 
     function handleMove(event: MouseEvent) {
@@ -36,8 +73,10 @@ function Board({ picture, setPicture, color, backgroundType }: BoardProps) {
             })
         }
 
-        if (paiting) {
-            setPicture(picture.fillAt(coordinates.x, coordinates.y, color));
+        if (paiting && brush === ToolType.Pencil ) {
+            const {x, y} = coordinates;
+            const painted = [{x, y, color}] as Array<PaintingProps>;
+            setPicture(picture.draw(picture, painted));
         }
     }
 
