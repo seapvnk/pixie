@@ -4,13 +4,15 @@ import Tool, { ToolType } from './components/Tool';
 import Picture from './model/Picture';
 
 import { RiEraserFill, RiPaintLine, RiPencilLine, RiStickyNote2Line } from "react-icons/ri";
+import ColorPicker from './components/ColorPicker';
 
 function App() {
 
-  const [color, setColor] = useState('#5e315b')
-  const [picture, setPicture] = useState(Picture.empty(32, 32, '#ffffff00'))
-  const [brush, setBrush] = useState(ToolType.Pencil)
-  const pallete = [
+  const [color, setColor] = useState('#5e315b');
+  const [picture, setPicture] = useState(Picture.empty(32, 32, '#ffffff00'));
+  const [brush, setBrush] = useState(ToolType.Pencil);
+
+  const [palette, setColorPalette] = useState([
     '#5e315b', '#8c3f5d',  '#ba6156',
     '#f2a65e',  '#ffe478',  '#cfff70',
     '#8fde5d',  '#3ca370',  '#3d6e70',
@@ -23,8 +25,8 @@ function App() {
     '#eb564b',  '#b0305c',  '#73275c',
     '#422445',  '#5a265e',  '#80366b',
     '#bd4882',  '#ff6b97 ',
-  ];
-
+  ]);
+  
   function clearCanvas() {
     if (window.confirm('Delete your drawing?')) {
       setPicture(Picture.empty(32, 32, '#ffffff00'));
@@ -48,7 +50,6 @@ function App() {
           <Tool fn={switchBrush(ToolType.Pencil)}> <RiPencilLine /> </Tool>
           <Tool fn={switchBrush(ToolType.Fill)}> <RiPaintLine /> </Tool>
           <Tool fn={clearCanvas}> <RiStickyNote2Line /> </Tool>
-          <Tool fn={selectColor('#ffffff00')}> <RiEraserFill /> </Tool>
         </div>
 
         <Board 
@@ -60,12 +61,19 @@ function App() {
         />
 
         <div className="tools">
-          {pallete.map(color => {
-              return (
-                <Tool 
-                  fn={selectColor(color)}
-                  style={{ background: color }}
-                />
+          <Tool fn={selectColor('#ffffff00')}> <RiEraserFill /> </Tool>
+          <ColorPicker 
+            colorPalette={palette} 
+            setColorPalette={setColorPalette} 
+            brushColor={selectColor}
+          />
+          {palette.map((color, index) => {
+            return (
+              <Tool
+              key={index}
+              fn={selectColor(color)}
+              style={{ background: color }}
+              />
               )  
             })}
         </div>

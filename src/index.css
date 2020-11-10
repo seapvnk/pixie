@@ -76,3 +76,6 @@ h1 {
   border: 1px solid #00adb5;
 }
 
+.input-tool {
+  display: none;
+}
