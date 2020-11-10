@@ -28,7 +28,7 @@ npm start
 
 - [ ] Save drawing in png format
 - [ ] Save drawing to css (using box-shadow properties)
-- [ ] Add multicolor component/tool (swith current color to any color)
+- [x] ~~Add colorpicker~~
 - [ ] Switch color palette (import hex palettes)
 - [ ] Dropper tool to select a color in picture
 - [ ] Add more tools
