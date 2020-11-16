@@ -56,7 +56,6 @@ function App() {
           picture={picture} 
           setPicture={setPicture} 
           color={color}
-          backgroundType={1}
           brush={brush}
         />
 

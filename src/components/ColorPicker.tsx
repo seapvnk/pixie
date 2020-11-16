@@ -19,11 +19,13 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ setColorPalette, colorPalette
     
     return (
         <React.Fragment>
+            
             <label htmlFor="color-picker">
                 <Tool style={{backgroundColor: selectedColor}} fn={() => {
                     appendColor();
                 }}>+</Tool>
             </label>
+            
             <input 
                 className="input-tool"
                 type="color"
@@ -34,7 +36,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ setColorPalette, colorPalette
                     setSelectedColor(e.target.value);
                     setBrushColor();
                 }}
-                />
+            />
         </React.Fragment>
     )
 }
