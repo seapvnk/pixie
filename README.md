@@ -30,5 +30,5 @@ npm start
 - [ ] Save drawing to css (using box-shadow properties)
 - [x] ~~Add colorpicker~~
 - [ ] Switch color palette (import hex palettes)
-- [ ] Dropper tool to select a color in picture
+- [x] Dropper tool to select a color in picture
 - [ ] Add more tools
