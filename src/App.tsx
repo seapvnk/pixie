@@ -3,7 +3,7 @@ import Board from './components/Board';
 import Tool, { ToolType } from './components/Tool';
 import Picture from './model/Picture';
 
-import { RiEraserFill, RiPaintLine, RiPencilLine, RiStickyNote2Line } from "react-icons/ri";
+import { RiEraserFill, RiPaintLine, RiPencilLine, RiStickyNote2Line, RiDropFill } from "react-icons/ri";
 import ColorPicker from './components/ColorPicker';
 
 function App() {
@@ -47,6 +47,7 @@ function App() {
 
       <div className="app">
         <div className="tools">
+          <Tool fn={switchBrush(ToolType.Drop)}> <RiDropFill /> </Tool>
           <Tool fn={switchBrush(ToolType.Pencil)}> <RiPencilLine /> </Tool>
           <Tool fn={switchBrush(ToolType.Fill)}> <RiPaintLine /> </Tool>
           <Tool fn={clearCanvas}> <RiStickyNote2Line /> </Tool>
@@ -57,6 +58,8 @@ function App() {
           setPicture={setPicture} 
           color={color}
           brush={brush}
+          setBrush={setBrush}
+          setColor={setColor}
         />
 
         <div className="tools">
@@ -68,11 +71,11 @@ function App() {
           />
           {palette.map((color, index) => {
             return (
-              <Tool
-              key={index}
-              fn={selectColor(color)}
-              style={{ background: color }}
-              />
+                <Tool
+                  key={index}
+                  fn={selectColor(color)}
+                  style={{ background: color }}
+                />
               )  
             })}
         </div>

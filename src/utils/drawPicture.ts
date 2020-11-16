@@ -6,14 +6,14 @@ interface MouseCoordinates {
 }
 
 export default function drawPicture(picture: Picture, context: CanvasRenderingContext2D, 
-    mouse: MouseCoordinates) {
+    mouse: MouseCoordinates, brushColor: string) {
     
     const scale = picture.scale;
 
     for (let y = 0; y < picture.height; y++) {
         for (let x = 0; x < picture.width; x++) {
             // draw cursor hover
-            context.strokeStyle = '#0ff';
+            context.strokeStyle = brushColor;
             context.strokeRect(mouse.x * scale, mouse.y * scale, scale, scale);
 
             // draw pixel

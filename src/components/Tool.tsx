@@ -3,6 +3,7 @@ import React, { CSSProperties } from 'react';
 enum ToolType {
     Pencil,
     Fill,
+    Drop,
 }
 
 interface ToolProps {

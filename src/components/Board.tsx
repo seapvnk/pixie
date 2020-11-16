@@ -8,10 +8,12 @@ interface BoardProps {
     picture: Picture;
     setPicture: Function;
     color: string;
-    brush: ToolType
+    brush: ToolType;
+    setColor: Function;
+    setBrush: Function;
 }
 
-function Board({ picture, setPicture, color, brush }: BoardProps) {
+function Board({ picture, setPicture, color, brush, setColor, setBrush }: BoardProps) {
 
     const canvasReference = useRef<HTMLCanvasElement>(null);
     const [paiting, setPainting] = useState(false)
@@ -39,6 +41,12 @@ function Board({ picture, setPicture, color, brush }: BoardProps) {
             setPicture(picture.draw(picture, painted));
         }
         
+        if (brush === ToolType.Drop) {
+            const newColor = picture.pixel(x, y);
+            
+            setColor(newColor);
+            setBrush(ToolType.Pencil);
+        }
     }
 
     function handleMove(event: MouseEvent) {
@@ -66,7 +74,7 @@ function Board({ picture, setPicture, color, brush }: BoardProps) {
             if (context) {
                 canvas.width = picture.width * picture.scale;
                 canvas.height = picture.height * picture.scale;
-                drawPicture(picture, context, coordinates);
+                drawPicture(picture, context, coordinates, color);
             }
         }
     }, [picture, coordinates])
@@ -84,7 +92,8 @@ function Board({ picture, setPicture, color, brush }: BoardProps) {
             onMouseDown={handleClick}
             onMouseUp={() => setPainting(false)}
             onMouseLeave={() => setPainting(false)}
-            className="board transparent-bg">
+            className="board transparent-bg"
+        >
         </canvas>
     )
 }
