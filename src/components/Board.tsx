@@ -43,6 +43,7 @@ function Board({ picture, setPicture, color, brush }: BoardProps) {
 
     function handleMove(event: MouseEvent) {
         const rect = canvasReference.current?.getBoundingClientRect();
+
         if (rect) {
             setCoordinates({
                 x: Math.floor((event.clientX - rect.left) / picture.scale),
@@ -53,6 +54,7 @@ function Board({ picture, setPicture, color, brush }: BoardProps) {
         if (paiting && brush === ToolType.Pencil ) {
             const {x, y} = coordinates;
             const painted = [{x, y, color}] as Array<PaintingProps>;
+
             setPicture(picture.draw(picture, painted));
         }
     }
@@ -64,10 +66,10 @@ function Board({ picture, setPicture, color, brush }: BoardProps) {
             if (context) {
                 canvas.width = picture.width * picture.scale;
                 canvas.height = picture.height * picture.scale;
-                drawPicture(picture, context);
+                drawPicture(picture, context, coordinates);
             }
         }
-    }, [picture])
+    }, [picture, coordinates])
 
     return (
         <canvas
@@ -81,6 +83,7 @@ function Board({ picture, setPicture, color, brush }: BoardProps) {
             onMouseMove={handleMove}
             onMouseDown={handleClick}
             onMouseUp={() => setPainting(false)}
+            onMouseLeave={() => setPainting(false)}
             className="board transparent-bg">
         </canvas>
     )
