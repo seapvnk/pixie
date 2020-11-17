@@ -26,7 +26,7 @@ npm start
 
 ## Roadmap
 
-- [ ] Save drawing in png format
+- [x] Save drawing in png format
 - [ ] Save drawing to css (using box-shadow properties)
 - [x] ~~Add colorpicker~~
 - [ ] Switch color palette (import hex palettes)
