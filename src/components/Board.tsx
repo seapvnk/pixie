@@ -84,7 +84,7 @@ function Board({ picture, setPicture, color, brush, setColor, setBrush, switchTr
 
         if (save) {
             if (canvasReference.current) {
-                const fileName = "image";
+                const fileName = `pixie-${Date.now()}` ;
 
                 const link = document.createElement('a');
                 link.download = fileName + '.png';
