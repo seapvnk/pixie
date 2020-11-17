@@ -9,11 +9,15 @@ interface BoardProps {
     setPicture: Function;
     color: string;
     brush: ToolType;
+
     setColor: Function;
     setBrush: Function;
+
+    switchTrigger: Function;
+    save: boolean;
 }
 
-function Board({ picture, setPicture, color, brush, setColor, setBrush }: BoardProps) {
+function Board({ picture, setPicture, color, brush, setColor, setBrush, switchTrigger, save }: BoardProps) {
 
     const canvasReference = useRef<HTMLCanvasElement>(null);
     const [paiting, setPainting] = useState(false)
@@ -77,6 +81,25 @@ function Board({ picture, setPicture, color, brush, setColor, setBrush }: BoardP
                 drawPicture(picture, context, coordinates, color);
             }
         }
+
+        if (save) {
+            if (canvasReference.current) {
+                const fileName = "image";
+
+                const link = document.createElement('a');
+                link.download = fileName + '.png';
+                
+                canvasReference.current.toBlob( blob => {
+                    link.href = URL.createObjectURL(blob);
+                    link.click();
+                });
+                
+
+                link.remove();
+            }
+
+            switchTrigger(false);
+        }
     }, [picture, coordinates])
 
     return (
@@ -87,6 +110,7 @@ function Board({ picture, setPicture, color, brush, setColor, setBrush }: BoardP
                 height: `${picture.scale * picture.height}px`,
             }}
 
+            id="canvas-id"
             ref={canvasReference}
             onMouseMove={handleMove}
             onMouseDown={handleClick}

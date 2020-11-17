@@ -3,7 +3,8 @@ import Board from './components/Board';
 import Tool, { ToolType } from './components/Tool';
 import Picture from './model/Picture';
 
-import { RiEraserFill, RiPaintLine, RiPencilLine, RiStickyNote2Line, RiDropFill } from "react-icons/ri";
+import { RiEraserFill, RiPaintLine, RiPencilLine, 
+         RiStickyNote2Line, RiDropFill, RiSave2Fill } from "react-icons/ri";
 import ColorPicker from './components/ColorPicker';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [color, setColor] = useState('#5e315b');
   const [picture, setPicture] = useState(Picture.empty(32, 32, '#ffffff00'));
   const [brush, setBrush] = useState(ToolType.Pencil);
+  const [triggerSaveButton, setTriggerSaveButton] = useState(false);
 
   const [palette, setColorPalette] = useState([
     '#5e315b', '#8c3f5d',  '#ba6156',
@@ -47,6 +49,7 @@ function App() {
 
       <div className="app">
         <div className="tools">
+          <Tool fn={() => setTriggerSaveButton(true)}><RiSave2Fill /></Tool>
           <Tool fn={switchBrush(ToolType.Drop)}> <RiDropFill /> </Tool>
           <Tool fn={switchBrush(ToolType.Pencil)}> <RiPencilLine /> </Tool>
           <Tool fn={switchBrush(ToolType.Fill)}> <RiPaintLine /> </Tool>
@@ -60,6 +63,8 @@ function App() {
           brush={brush}
           setBrush={setBrush}
           setColor={setColor}
+          switchTrigger={setTriggerSaveButton}
+          save={triggerSaveButton}
         />
 
         <div className="tools">
