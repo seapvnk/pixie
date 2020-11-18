@@ -12,9 +12,12 @@ export default function drawPicture(picture: Picture, context: CanvasRenderingCo
 
     for (let y = 0; y < picture.height; y++) {
         for (let x = 0; x < picture.width; x++) {
-            // draw cursor hover
-            context.strokeStyle = brushColor;
-            context.strokeRect(mouse.x * scale, mouse.y * scale, scale, scale);
+
+            if (mouse.x > 0 || mouse.y > 0) {
+                // draw cursor hover
+                context.strokeStyle = brushColor;
+                context.strokeRect(mouse.x * scale, mouse.y * scale, scale, scale);
+            }
 
             // draw pixel
             context.fillStyle = picture.pixel(x, y);

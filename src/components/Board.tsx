@@ -71,6 +71,11 @@ function Board({ picture, setPicture, color, brush, setColor, setBrush, switchTr
         }
     }
 
+    function handleMouseLeave() {
+        setPainting(false);
+        setCoordinates({ x: -1, y: -1});
+    }
+
     useEffect(() => {
         if (canvasReference.current) {
             const canvas = canvasReference.current;
@@ -84,23 +89,24 @@ function Board({ picture, setPicture, color, brush, setColor, setBrush, switchTr
 
         if (save) {
             if (canvasReference.current) {
-                const fileName = `pixie-${Date.now()}` ;
-
+                const fileName = `pixie-${Date.now()}`;
+                
                 const link = document.createElement('a');
                 link.download = fileName + '.png';
                 
+                setCoordinates({ x: -1, y: -1 });
+
                 canvasReference.current.toBlob( blob => {
                     link.href = URL.createObjectURL(blob);
                     link.click();
                 });
-                
 
                 link.remove();
             }
 
             switchTrigger(false);
         }
-    }, [picture, coordinates])
+    }, [picture, coordinates, save])
 
     return (
         <canvas
@@ -115,7 +121,7 @@ function Board({ picture, setPicture, color, brush, setColor, setBrush, switchTr
             onMouseMove={handleMove}
             onMouseDown={handleClick}
             onMouseUp={() => setPainting(false)}
-            onMouseLeave={() => setPainting(false)}
+            onMouseLeave={handleMouseLeave}
             className="board transparent-bg"
         >
         </canvas>
