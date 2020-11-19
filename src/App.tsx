@@ -43,6 +43,19 @@ function App() {
     return () => setColor(selectedColor);
   }
 
+  function handleKeyShortcuts(event: KeyboardEvent) {
+      if (!event.altKey && !event.ctrlKey) {
+          switch (event.key) {
+              case 'b': setBrush(ToolType.Fill); break;
+              case 'e': setColor('#ffffff00'); break;
+              case 'p': setBrush(ToolType.Pencil); break;
+              case 'd': setBrush(ToolType.Drop); break;
+          }
+      }
+  }
+
+  window.addEventListener('keydown', event => handleKeyShortcuts(event));
+
   return (
     <div>
       <h1>Pixie</h1>
