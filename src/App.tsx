@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Board from './components/Board';
 import Tool, { ToolType } from './components/Tool';
 import Picture from './model/Picture';
@@ -13,6 +13,7 @@ function App() {
   const [picture, setPicture] = useState(Picture.empty(32, 32, '#ffffff00'));
   const [brush, setBrush] = useState(ToolType.Pencil);
   const [triggerSaveButton, setTriggerSaveButton] = useState(false);
+  const [scale, setScale] = useState(16);
 
   const [palette, setColorPalette] = useState([
     '#5e315b', '#8c3f5d',  '#ba6156',
@@ -42,16 +43,26 @@ function App() {
   function selectColor(selectedColor: string) {
     return () => setColor(selectedColor);
   }
+  
+  useEffect(() => {
+    setPicture(new Picture(picture.width, picture.height, picture.pixels, scale));
+  }, [scale]);
 
   function handleKeyShortcuts(event: KeyboardEvent) {
-      if (!event.altKey && !event.ctrlKey) {
-          switch (event.key) {
-              case 'b': setBrush(ToolType.Fill); break;
-              case 'e': setColor('#ffffff00'); break;
-              case 'p': setBrush(ToolType.Pencil); break;
-              case 'd': setBrush(ToolType.Drop); break;
-          }
-      }
+    event.preventDefault();
+
+    if (!event.altKey && !event.ctrlKey) {
+        switch (event.key) {
+            case 'b': setBrush(ToolType.Fill); break;
+            case 'e': setColor('#ffffff00'); break;
+            case 'p': setBrush(ToolType.Pencil); break;
+            case 'd': setBrush(ToolType.Drop); break;
+
+            // scale
+            case 'a': setScale(scale - 4); break;
+            case 's': setScale(scale + 4); break;
+        }
+    }
   }
 
   window.addEventListener('keydown', event => handleKeyShortcuts(event));
