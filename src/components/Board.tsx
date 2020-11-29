@@ -106,7 +106,7 @@ function Board({ picture, setPicture, color, brush, setColor, setBrush, switchTr
 
             switchTrigger(false);
         }
-    }, [picture, coordinates, save])
+    }, [picture, coordinates, save, color, switchTrigger]);
 
     return (
         <canvas

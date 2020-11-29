@@ -46,7 +46,7 @@ function App() {
   
   useEffect(() => {
     setPicture(new Picture(picture.width, picture.height, picture.pixels, scale));
-  }, [scale]);
+  }, [scale, picture.width, picture.height, picture.pixels]);
 
   function handleKeyShortcuts(event: KeyboardEvent) {
     event.preventDefault();
