@@ -1,6 +1,9 @@
 # pixie
 > A web based pixelart editor made with react
 
+
+try [pixie](pixie.seapvnk.vercel.app/)
+
 <p align="center">
   <img width="70%" src="./screenshots/app_screenshot.png">
 </p>
