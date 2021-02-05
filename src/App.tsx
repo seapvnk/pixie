@@ -19,12 +19,12 @@ function App() {
   const [scale, setScale] = useState(16);
 
   const [palette, setColorPalette] = useState(toPalette(`
-    #1a1c2c#5d275d#b13e53
-    #ef7d57#ffcd75#a7f070
-    #38b764#257179#29366f
-    #3b5dc9#41a6f6#73eff7
-    #f4f4f4#94b0c2#566c86
-    #333c57
+         #050914#110524#3b063a#691749#9c3247#d46453#f5a15d#ffcf8e#ff7a7d
+         #ff417d#d61a88#94007a#42004e#220029#100726#25082c#3d1132#73263d#bd4035#ed7b39
+         #ffb84a#fff540#c6d831#77b02a#429058#2c645e#153c4a#052137#0e0421#0c0b42#032769
+         #144491#488bd4#78d7ff#b0fff1#faffff#c7d4e1#928fb8#5b537d#392946#24142c#0e0f2c
+         #132243#1a466b#10908e#28c074#3dff6e#f8ffb8#f0c297#cf968c#8f5765#52294b#0f022e
+         #35003b#64004c#9b0e3e#d41e3c#ed4c40#ff9757#d4662f#9c341a#691b22#450c28#2d002e
   `));
     
   const [color, setColor] = useState(palette[0]);
